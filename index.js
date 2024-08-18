@@ -22,6 +22,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
+    await client.connect();
     const skillCollection = client.db('portfolioDB').collection('skills');
     const projectCollection = client.db('portfolioDB').collection('projects');
     const certificateCollection = client.db('portfolioDB').collection('certificates');
@@ -55,16 +56,13 @@ async function run() {
       res.send(result);
     });
 
-    // await client.connect();
-    // Send a ping to confirm a successful connection
+    
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
     // If you close the client here, you won't be able to handle incoming requests
-    // You might want to move `await client.close();` outside of the `finally` block
-    // or handle the closing of the client elsewhere.
-    // await client.close();
+    
   }
 }
 
