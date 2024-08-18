@@ -20,10 +20,7 @@ const client = new MongoClient(uri, {
     },
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    tlsAllowInvalidCertificates: true,
-    tlsAllowInvalidHostnames: true,
-  });
-  
+});
 
 async function run() {
   try {
@@ -83,7 +80,8 @@ async function run() {
 
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error);
-  } 
+    process.exit(1); // Exit the process with an error code if connection fails
+  }
 }
 
 run().catch(console.dir);
