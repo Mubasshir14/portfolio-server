@@ -23,6 +23,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
+    
     const skillCollection = client.db('portfolioDB').collection('skills');
     const projectCollection = client.db('portfolioDB').collection('projects');
     const certificateCollection = client.db('portfolioDB').collection('certificates');
