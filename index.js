@@ -31,40 +31,54 @@ async function run() {
 
     // Get all skills
     app.get('/skill', async (req, res) => {
-      const cursor = skillCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
+      try {
+        const result = await skillCollection.find().toArray();
+        res.send(result);
+      } catch (error) {
+        console.error("Error fetching skills:", error);
+        res.status(500).send("Failed to retrieve skills.");
+      }
     });
 
     // Get all projects
     app.get('/project', async (req, res) => {
-      const cursor = projectCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
+      try {
+        const result = await projectCollection.find().toArray();
+        res.send(result);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+        res.status(500).send("Failed to retrieve projects.");
+      }
     });
 
     // Get all certificates
     app.get('/certificate', async (req, res) => {
-      const cursor = certificateCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
+      try {
+        const result = await certificateCollection.find().toArray();
+        res.send(result);
+      } catch (error) {
+        console.error("Error fetching certificates:", error);
+        res.status(500).send("Failed to retrieve certificates.");
+      }
     });
 
-    // Get all certificates
+    // Get all blogs
     app.get('/blog', async (req, res) => {
-      const cursor = blogCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
+      try {
+        const result = await blogCollection.find().toArray();
+        res.send(result);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+        res.status(500).send("Failed to retrieve blogs.");
+      }
     });
 
-    
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    // If you close the client here, you won't be able to handle incoming requests
-    
-  }
+
+  } catch (error) {
+    console.error("Failed to connect to MongoDB:", error);
+  } 
 }
 
 run().catch(console.dir);
